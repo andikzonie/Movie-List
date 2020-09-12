@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import { useStyles } from "./UseStyles";
 import clsx from "clsx";
 import AppBar from "@material-ui/core/AppBar";
@@ -40,7 +41,9 @@ const Navbar = (props) => {
     handleCloseProfileIcon();
   };
 
-
+  const home = () => {
+    props.history.push("/");
+  };
 
   
 
@@ -62,58 +65,28 @@ const Navbar = (props) => {
       <Toolbar>
         <Grid container spacing={1} justify="space-between" alignItems="center">
           <Grid item>
-            <Grid
-              container
-              spacing={3}
-              alignItems="center"
-              justify="center"
-              alignContent="center"
-            >
-             
-             </Grid>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item>
+                <Link
+                  component="button"
+                  variant="h6"
+                  underline="none"
+                  color="inherit"
+                  onClick={home}
+                >
+                  Movie List
+                </Link>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item>
-            <Grid container spacing={1} alignItems="center">
-              {user ? (
-                <>
-                  <Grid item>
-                    <Button
-                      aria-controls="menu-appbar"
-                      aria-haspopup="true"
-                      onClick={handleProfileIcon}
-                      color="default"
-                      startIcon={<AccountCircle />}
-                    >
-                      {user.username}
-                    </Button>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      keepMounted
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
-                      open={openProfileIcon}
-                      onClose={handleCloseProfileIcon}
-                    >
-                      <MenuItem onClick={handleProfile}>Profile</MenuItem>
-                      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-                    </Menu>
-                  </Grid>
-                </>
-              ) : (
-                <>
-                  <Grid item>
+           <Grid container spacing={1} alignItems="center">
+              <Grid item>
                     <Button color="default" onClick={Login}>
                       Login
                     </Button>
-                  </Grid>
-                  <Grid item>
+              </Grid>
+              <Grid item>
                     <Button
                       variant="contained"
                       color="primary"
@@ -121,9 +94,7 @@ const Navbar = (props) => {
                     >
                       Sign Up
                     </Button>
-                  </Grid>
-                </>
-              )}
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
