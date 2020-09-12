@@ -7,8 +7,9 @@ import Sidebar from "../Navs/Sidebar";
 import Footer from "../Navs/Footer";
 import Login from "../Auth/Login";
 import Movies from "../Movies/Movies";
-
+import DetailMovies from "../Movies/DetailMovies";
 import { AuthContext } from "../Context/AuthContext";
+
 const Routes = () => {
     const classes = useStyles();
     
@@ -40,27 +41,9 @@ const Routes = () => {
             <div className={classes.toolbar} />
             <Switch>
               <Route exact path="/" component={Movies} />
-              {/* <Route exact path="/movie-list" component={Movies} />
-              <Route path="/movie-list/:id?" component={DetailMovies} />
-              <PrivateRoute
-                exact
-                path="/movies"
-                user={user}
-                component={TableMovies}
-              />
-              <PrivateRoute
-                path="/movies/create"
-                user={user}
-                component={FormMovies}
-              />
-              <PrivateRoute
-                path="/movies/edit/:id?"
-                user={user}
-                component={FormMovies}
-              />
               
-              <PrivateRoute path="/profile" user={user} component={Profile} />
-              <LoginRoute path="/signup" user={user} component={SignUp} /> */}
+              <Route path="/movie-list/:id?" component={DetailMovies} />
+             
               <LoginRoute path="/login" user={user} component={Login} />
               
             </Switch>

@@ -44,21 +44,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Movies = () => {
+const Movies = (props) => {
   const classes = useStyles();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const movieSkeleton = [1, 2, 3, 4];
 
-//   const DetailMovies = (id) => {
-//     props.history.push(`/movie-list/${id}`);
-//   };
+  const DetailMovies = (id) => {
+    props.history.push(`/movie-list/${id}`);
+  };
 
   useEffect(() => {
     axios
       .get("https://backendexample.sanbersy.com/api/movies")
       .then((res) => {
-        setMovies(res.data);
+        
+        let data = res.data.map(x => {
+          return{
+            id: x.id,
+            title: x.title,
+            description: x.description,
+            year: x.year,
+            duration: x.duration,
+            genre: x.genre,
+            rating: x.rating,
+            image_url: x.image_url,
+            review: x.review
+          }
+        })
+        data.sort((a,b) => Number(b.rating) - Number(a.rating));
+        setMovies(data);
+
         setLoading(false);
       })
       .catch((err) => {
@@ -112,7 +128,7 @@ const Movies = () => {
             })
           : movies.map((movie) => (
               <Grid item key={movie.id} xs={12} sm={6} md={3}>
-                <CardActionArea >
+                <CardActionArea onClick={() => DetailMovies(movie.id)}>
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
